@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.8.10"
+    `maven-publish`
     `java-gradle-plugin`
 }
 
