@@ -18,7 +18,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("patcher") {
+        create("net.graphitemc.patcher") {
             id = "net.graphitemc.patcher"
             implementationClass = "net.graphitemc.patcher.PatcherPlugin"
         }

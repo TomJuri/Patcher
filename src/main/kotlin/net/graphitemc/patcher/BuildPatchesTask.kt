@@ -12,18 +12,11 @@ import java.io.PrintStream
 
 abstract class BuildPatchesTask : DefaultTask() {
 
-    @get:InputDirectory
-    abstract val cleanSourceInput: DirectoryProperty
-    @get:InputDirectory
-    abstract val dirtySourceInput: DirectoryProperty
-    @get:OutputDirectory
-    abstract val outputDirectory: DirectoryProperty
-
     @TaskAction
     fun buildPatches() {
-        val clean = cleanSourceInput.get().asFile
-        val dirty = dirtySourceInput.get().asFile
-        val output = outputDirectory.get().asFile
+        val clean = PatcherPlugin.gextension.cleanSourceDir.get()
+        val dirty = PatcherPlugin.gextension.dirtySourceDir.get()
+        val output = PatcherPlugin.gextension.patchesDir.get()
         output.deleteRecursively()
         output.mkdirs()
 
@@ -37,7 +30,7 @@ abstract class BuildPatchesTask : DefaultTask() {
                     // Compare the two files using a byte-by-byte comparison
                     if (!dirtyFile.readBytes().contentEquals(cleanFile.readBytes())) {
                         // Create patch file
-                        val patchFile = File(output, relativePath.toString())
+                        val patchFile = File(output, "$relativePath.patch")
                         patchFile.parentFile.mkdirs()
 
                         val patchOutput = PrintStream(patchFile)
