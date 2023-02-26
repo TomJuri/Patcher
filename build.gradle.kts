@@ -9,11 +9,11 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://maven.minecraftforge.net")
 }
 
 dependencies {
-    implementation(gradleApi())
-    implementation("com.googlecode.java-diff-utils:diffutils:1.3.0")
+    implementation("net.minecraftforge:DiffPatch:2.0.7:all")
 }
 
 gradlePlugin {
